@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Attendence List - Professor</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+
+  body {
+      font-family: 'Open Sans Condensed', sans-serif;
+      line-height: 1.8;
+      color: #f5f6f7;
+  }
+  p {font-family: 'Open Sans Condensed', sans-serif;
+      line-height: 1.8;
+    font-size: 20px;}
+
+
+  .p2 {font-size: 25px;
+      color: #960808;
+     }
+
+  .margin {margin-bottom: 45px;}
+  
+  .bg-1 {
+      font-family: 'Open Sans Condensed', sans-serif;
+      line-height: 1.8;
+      color: #2f2f2f;
+      background:url('http://www.athiewohnrath.com.br/wp-content/uploads/2015/05/wpid-3ae0dfa2-711b-4c9b-9810-303278c8cdcb.jpg')no-repeat;
+      background-size: 100%;
+      width: fixed;
+
+  }
+  .bg-2 {
+      padding-top: 70px;
+      padding-bottom: 70px;
+      background-color: #2B2B2B; 
+      color: #ffffff;
+  }
+  .bg-3 {
+      background-color: #ffffff; 
+      color: #2f2f2f;
+      font-size: 20px;;
+  }
+
+  .container-fluid {
+      padding-top: 40px;
+      padding-bottom: 70px;
+    }
+
+     .transparent{    
+    background-color: rgba(255,255,255,0.7);
+    width: 1350px;
+    vertical-align: center;
+   }
+ 
+
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 6px;
+      background-color: #F5F5F5;
+      color: #2f2f2f;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+  </style>
+</head>
+<body>
+  <!-- Menu -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand p2" href="#">ATTENDENCE LIST</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#perfil">PERFIL</a></li>
+          <li><a href="#frequencia">CHAMADA</a></li>
+          <li><a href="login.html">SAIR</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container bg-1 text-center transparent ">
+    <a id="perfil"></a>
+    <div class="jumbotron transparent">
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="row">
+      <div class="col-sm-6">
+        <h3>Luciano Soares</h3>
+        <img src="https://avatars2.githubusercontent.com/u/1945076?v=3&s=460" class="img-circle" alt="foto-perfil" width="125" height="125">
+        <p>Engenharia da computação, professor. </p>
+        <p>Tecnologias Web, 4º semestre. </p>
+      </div>
+      <div class=col-sm-6>
+        <h3 class="margin">Fazer chamada</h3>
+        <p> Você está em horário de aula:</p>
+        <button type="button" class="btn-lg btn-default"> Abrir lista</button>
+        <br>
+        <br>
+        <button type="button" class="btn-lg btn disabled">Fechar lista</button>
+
+        <!--<p> Você está em horário de aula:</p>
+        <button type="button" class="btn-lg btn disabled"> Abrir lista</button>
+        <br>
+        <br>
+        <button type="button" class="btn-lg btn-default">Fechar lista</button>-->
+
+        <!--<p> Você não está em horário de aula:</p>
+        <button type="button" class="btn-lg btn disabled"> Abrir Lista</button>
+        <br>
+        <br>
+        <button type="button" class="btn-lg btn disabled">Fechar Lista</button>-->
+      </div>
+    </div>
+    </div>
+    <br>
+    <br>
+    <br>
+  </div> 
+
+  <nav class="navbar navbar-default">
+    <a id="frequencia"></a>
+      <div class="container">
+        <div class="navbar-header">
+        </div>
+      </div>
+  </nav>
+
+<!-- Frequencia -->
+<div class="container-fluid bg-3 text-center">
+  <h3 class="margin p2">Lista de presença</h3>
+  <p> Abaixo a lista de alunos que compareceram à sua aula:</p>
+  <p> TECNOLOGIAS WEB</p>
+  <p> 18/08</p>
+  <table class="table table-hover text-center">
+      <thead class="text-center">
+        <tr>
+          <th class="p2 text-center">Aluno</th>
+          <th class="p2 text-center">Presença</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>André de Marco Toyama</td>
+          <td>Ausente</td>
+        </tr>
+        <tr>
+          <td>Antonio Lacombe Sigrist</td>
+          <td>Presente</td>
+        </tr>
+        <tr>
+          <td>Carlos Eduardo Puttini Rosa</td>
+          <td>Presente</td>
+        </tr>
+         <tr>
+          <td>Felipe Frid Buniac</td>
+          <td>Ausente</td>
+        </tr>
+         <tr>
+          <td>Gabriela Cintra de Freitas Almeida</td>
+          <td>Presente</td>
+        </tr>
+        <tr>
+          <td>Gabriel do Vale Rios</td>
+          <td>Presente</td>
+        </tr>
+        <tr>
+          <td>Gustavo Efeiche</td>
+          <td>Presente</td>
+        </tr>
+        <tr>
+          <td>João Pedro Pieroni de Castro </td>
+          <td>Presente</td>
+        </tr>
+        <tr>
+          <td>Khalil Yassine Yassine</td>
+          <td>Presente</td>
+        </tr>
+        <tr>
+          <td>Lucas Scarlato Astur</td>
+          <td>Presente</td>
+        </tr>
+        <tr>
+          <td>Marcelo Gianfaldoni de Andrade</td>
+          <td>Presente</td>
+        </tr>
+        <tr>
+          <td>Matheus Dias Marotzke Dib</td>
+          <td>Presente</td>
+        </tr>
+        <tr>
+          <td>Pedro Cunial Campos</td>
+          <td>Presente</td>
+        </tr>
+        <tr>
+          <td>Rachel Pereira Bottino de Moraes</td>
+          <td>Presente</td>
+        </tr>
+        <tr>
+          <td>Rafael Molines Ismael</td>
+          <td>Presente</td>
+        </tr>
+      </table>
+      <button type="button" class="btn-lg btn-default">Alterar</button>
+          <br>
+          <br>
+          <button type="button" class="btn-lg btn-default">Confirmar</button>    
+  </div>
+
+   <nav class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container">
+        <div class="navbar-header">
+          <br>
+          <br>
+        </div>
+      </div>
+  </nav>
+
+</body>
+</html>
