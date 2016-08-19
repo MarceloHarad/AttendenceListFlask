@@ -4,10 +4,13 @@
   <title>Attendence List - Insper</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src="static/login.js"></script>
   <style>
 
   body {
@@ -23,7 +26,7 @@
 
   .margin {margin-bottom: 45px;}
 
-  .transparent{    
+  .transparent{
     background-color: rgba(255,255,255,0.7);
     width: 600px;
    }
@@ -43,6 +46,7 @@
       color: #1abc9c !important;
   }
   </style>
+
 </head>
 <body>
   <a id="login"></a>
@@ -55,19 +59,19 @@
     </div>
   </nav>
 
-  <div class="container text-center centered">
+  <div id="home" class="container text-center centered">
     <div class="jumbotron transparent centered">
-      <!-- HOME
+      <!-- HOME --->
       <h1>Bem Vindo!</h1>
       <p>Se você já é cadastrado, faça login:</p>
       <form role="form">
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" class="form-control" id="email" placeholder="Digite seu email">
+          <input type="email" class="form-control" name="email" id="email" placeholder="Digite seu email">
         </div>
         <div class="form-group">
           <label for="pwd">Senha:</label>
-          <input type="password" class="form-control" id="pwd" placeholder="Digite sua senha">
+          <input type="password" class="form-control" id="password" placeholder="Digite sua senha">
         </div>
         <div class="checkbox">
           <label><input type="checkbox"> Lembrar-me</label>
@@ -75,9 +79,13 @@
         <button type="submit" class="btn btn-default">Entrar</button>
        </form>
       <p>e ainda não possui cadastro, registre-se:</p>
-      <button type="buttom" class="btn btn-default">Registre-se</button>-->
-      
-      <!-- REGISTRO 1
+      <button type="buttom" onclick="show('register1');hide('home');" class="btn btn-default">Registre-se</button>
+    </div>
+  </div>
+
+  <div style="display: none;" id="register1" class="container text-center centered">
+    <div class="jumbotron transparent centered">
+      <!-- REGISTRO 1 -->
       <h1>Registro</h1>
       <p>Informações básicas:</p>
       <form role="form">
@@ -91,13 +99,18 @@
         </div>
         <p>Entrar como:</p>
         <div class="radio">
-          <label><input type=radio name=usuario value="aluno">Aluno </labe>
-          <label><input type=radio name=usuario value="professor">Professor</label>
+          <label><input type=radio name="std_prof" value="aluno">Aluno </labe>
+          <label><input type=radio name="std_prof" value="professor">Professor</label>
         </div>
        </form>
-      <button type="buttom" class="btn btn-default">Continuar</button>-->
+      <button type="buttom" onclick="stdOrProf();" class="btn btn-default">Continuar</button>
+    </div>
+  </div>
 
-      <!--REGISTRO 2 ALUNO-->
+  <div style="display: none;" id="register_std2" class="container text-center centered">
+    <div class="jumbotron transparent centered">
+
+      <!--REGISTRO 2 ALUNO -->
       <h1>Registro</h1>
       <p>Curso:</p>
       <form role="form">
@@ -121,13 +134,18 @@
             <label><input type=radio name=semestre value="setimo">7º Semestre </label>
             <label><input type=radio name=semestre value="oitavo">8º Semestre</label><br>
             <label><input type=radio name=semestre value="nono">9º Semestre </label>
-            <label><input type=radio name=semestre value="decimo">10º Semestre</label><br>                 
+            <label><input type=radio name=semestre value="decimo">10º Semestre</label><br>
           </div>
         </div>
        </form>
       <button type="buttom" class="btn btn-default">Continuar</button>
+    </div>
+  </div>
 
-      <!-- REGISTRO 2 PROFESSOR
+  <div style="display: none;" id="register_prof2" class="container text-center centered">
+    <div class="jumbotron transparent centered">
+
+      <!-- REGISTRO 2 PROFESSOR-->
       <h1>Registro</h1>
       <p>Selecione o curso:</p>
       <form role="form">
@@ -151,14 +169,13 @@
             <label><input type=checkbox name=semestre value="setimo">7º Semestre </label>
             <label><input type=checkbox name=semestre value="oitavo">8º Semestre</label><br>
             <label><input type=checkbox name=semestre value="nono">9º Semestre </label>
-            <label><input type=checkbox name=semestre value="decimo">10º Semestre</label><br>                 
+            <label><input type=checkbox name=semestre value="decimo">10º Semestre</label><br>
           </div>
         </div>
        </form>
-      <button type="buttom" class="btn btn-default">Continuar</button>-->
-
+      <button type="buttom" class="btn btn-default">Continuar</button>
     </div>
-  </div>  
+  </div>
 
  <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
