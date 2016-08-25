@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+usin<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Attendence List - Insper</title>
@@ -11,6 +11,9 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <script src="static/login.js"></script>
+
+
+  <!-- CSS -->
   <style>
 
   body {
@@ -46,8 +49,11 @@
       color: #1abc9c !important;
   }
   </style>
+  <!--End CSS-->
 
 </head>
+
+<!-- Corpo do HTML -->
 <body>
   <a id="login"></a>
   <!-- Menu -->
@@ -59,124 +65,103 @@
     </div>
   </nav>
 
-  <div id="home" class="container text-center centered">
+  <div class="container text-center centered">
     <div class="jumbotron transparent centered">
-      <!-- HOME --->
-      <h1>Bem Vindo!</h1>
-      <p>Se você já é cadastrado, faça login:</p>
-      <form role="form">
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="Digite seu email">
-        </div>
-        <div class="form-group">
-          <label for="pwd">Senha:</label>
-          <input type="password" class="form-control" id="password" placeholder="Digite sua senha">
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox"> Lembrar-me</label>
-        </div>
-        <button type="submit" class="btn btn-default">Entrar</button>
-       </form>
-      <p>e ainda não possui cadastro, registre-se:</p>
-      <button type="buttom" onclick="show('register1');hide('home');" class="btn btn-default">Registre-se</button>
-    </div>
-  </div>
-
-  <div style="display: none;" id="register1" class="container text-center centered">
-    <div class="jumbotron transparent centered">
-      <!-- REGISTRO 1 -->
-      <h1>Registro</h1>
-      <p>Informações básicas:</p>
-      <form role="form">
-        <div class="form-group">
-          <label for="name">Nome:</label>
-          <input type="name" class="form-control" id="name">
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" class="form-control" id="email">
-        </div>
-        <p>Entrar como:</p>
-        <div class="radio">
-          <label><input type=radio name="std_prof" value="aluno">Aluno </labe>
-          <label><input type=radio name="std_prof" value="professor">Professor</label>
-        </div>
-       </form>
-      <button type="buttom" onclick="stdOrProf();" class="btn btn-default">Continuar</button>
-    </div>
-  </div>
-
-  <div style="display: none;" id="register_std2" class="container text-center centered">
-    <div class="jumbotron transparent centered">
-
-      <!--REGISTRO 2 ALUNO -->
-      <h1>Registro</h1>
-      <p>Curso:</p>
-      <form role="form">
-        <div class="form-group">
-          <div class="radio">
-            <label><input type=radio name=curso value="administração">Administração </label><br>
-            <label><input type=radio name=curso value="economia">Economia</label><br>
-            <label><input type=radio name=curso value="engenharia">Engenharia</label><br>
+      <!--Home-->
+      <form role="form" method="post">
+        <h1>Bem Vindo!</h1>
+        <p>Se você já é cadastrado, faça login:</p>
+        <div id = "home">
+          <div class="form-group">
+            <label for="email_login">Email:</label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Digite seu email" required>
           </div>
-        </div>
-        <p>Selecione o semestre:</p>
-      <form role="form">
-        <div class="form-group">
-          <div class="radio">
-            <label><input type=radio name=semestre value="primeiro">1º Semestre </label>
-            <label><input type=radio name=semestre value="segundo">2º Semestre</label><br>
-            <label><input type=radio name=semestre value="terceiro">3º Semestre </label>
-            <label><input type=radio name=semestre value="quarto">4º Semestre</label><br>
-            <label><input type=radio name=semestre value="quinto">5º Semestre </label>
-            <label><input type=radio name=semestre value="sexto">6º Semestre</label><br>
-            <label><input type=radio name=semestre value="setimo">7º Semestre </label>
-            <label><input type=radio name=semestre value="oitavo">8º Semestre</label><br>
-            <label><input type=radio name=semestre value="nono">9º Semestre </label>
-            <label><input type=radio name=semestre value="decimo">10º Semestre</label><br>
+          <div class="form-group">
+            <label for="pwd">Senha:</label>
+            <input type="password_login" class="form-control" id="password" placeholder="Digite sua senha" required >
           </div>
-        </div>
-       </form>
-      <button type="buttom" class="btn btn-default">Continuar</button>
-    </div>
-  </div>
-
-  <div style="display: none;" id="register_prof2" class="container text-center centered">
-    <div class="jumbotron transparent centered">
-
-      <!-- REGISTRO 2 PROFESSOR-->
-      <h1>Registro</h1>
-      <p>Selecione o curso:</p>
-      <form role="form">
-        <div class="form-group">
           <div class="checkbox">
-            <label><input type=checkbox name=curso value="administração">Administração </label><br>
-            <label><input type=checkbox name=curso value="economia">Economia</label><br>
-            <label><input type=checkbox name=curso value="engenharia">Engenharia</label><br>
+            <label><input type="checkbox"> Lembrar-me</label>
+          </div>
+          <button name="login" type="btn" class="btn btn-default" value="login">Entrar</button>
+          <p>e ainda não possui cadastro, registre-se:</p>
+          <button type="buttom" name = "btn" onclick="show('register1');hide('home');" class="btn btn-default">Registre-se</button>
+        </div>
+      <!--Registro 1 -->
+        <div style="display: none;" id = "register1">
+          <div id="name_div" class="form-group">
+            <label for="name">Nome:</label>
+            <input type="name" class="form-control" name="name" required>
+          </div>
+          <div id="email_div" class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" name="email" required>
+          </div>
+          <div id="password_div" class="form-group">
+            <label for="password">Senha:</label>
+            <input type="password" class="form-control" name="password" required>
+          </div>
+          <p>Entrar como:</p>
+            <div class="radio">
+              <label><input type=radio name="std_prof" value="aluno" required>Aluno</label>
+              <label><input type=radio name="std_prof" value="professor" required>Professor</label>
+            </div>
+            <button type="button" name="btn" value="continuar" onclick="stdOrProf();" class="btn btn-default">Continuar</button>
+        </div>
+        <!--Registro Aluno-->
+        <div style="display: none;" id = "register_std2">
+          <div class="form-group">
+            <div class="radio">
+              <label><input type=radio name=curso value="1">Administração </label><br>
+              <label><input type=radio name=curso value="2">Economia</label><br>
+              <label><input type=radio name=curso value="3">Engenharia</label><br>
+            </div>
+          </div>
+          <p>Selecione o semestre:</p>
+          <div class="form-group">
+            <div class="radio">
+              <label><input type=radio name=semestre value="1">1º Semestre </label>
+              <label><input type=radio name=semestre value="2">2º Semestre</label><br>
+              <label><input type=radio name=semestre value="3">3º Semestre </label>
+              <label><input type=radio name=semestre value="4">4º Semestre</label><br>
+              <label><input type=radio name=semestre value="5">5º Semestre </label>
+              <label><input type=radio name=semestre value="6">6º Semestre</label><br>
+              <label><input type=radio name=semestre value="7">7º Semestre </label>
+              <label><input type=radio name=semestre value="8">8º Semestre</label><br>
+              <label><input type=radio name=semestre value="9">9º Semestre </label>
+              <label><input type=radio name=semestre value="0">10º Semestre</label><br>
+            </div>
+          </div>
+          <button type="submit" name="btn" class="btn btn-default">Concluir</button>
+        </div>
+        <!--Registro Professor-->
+        <div style="display: none;" id = "register_prof2">
+          <div class="form-group">
+            <div class="checkbox">
+              <label><input type=checkbox name=curso value="administração">Administração </label><br>
+              <label><input type=checkbox name=curso value="economia">Economia</label><br>
+              <label><input type=checkbox name=curso value="engenharia">Engenharia</label><br>
+            </div>
+          </div>
+          <p>Selecione o semestre:</p>
+          <div class="form-group">
+            <div class="checkbox">
+              <label><input type=checkbox name=semestre value="primeiro">1º Semestre </label>
+              <label><input type=checkbox name=semestre value="segundo">2º Semestre</label><br>
+              <label><input type=checkbox name=semestre value="terceiro">3º Semestre </label>
+              <label><input type=checkbox name=semestre value="quarto">4º Semestre</label><br>
+              <label><input type=checkbox name=semestre value="quinto">5º Semestre </label>
+              <label><input type=checkbox name=semestre value="sexto">6º Semestre</label><br>
+              <label><input type=checkbox name=semestre value="setimo">7º Semestre </label>
+              <label><input type=checkbox name=semestre value="oitavo">8º Semestre</label><br>
+              <label><input type=checkbox name=semestre value="nono">9º Semestre </label>
+              <label><input type=checkbox name=semestre value="decimo">10º Semestre</label><br>
+            </div>
           </div>
         </div>
-      <p>Selecione o semestre:</p>
-      <form role="form">
-        <div class="form-group">
-          <div class="checkbox">
-            <label><input type=checkbox name=semestre value="primeiro">1º Semestre </label>
-            <label><input type=checkbox name=semestre value="segundo">2º Semestre</label><br>
-            <label><input type=checkbox name=semestre value="terceiro">3º Semestre </label>
-            <label><input type=checkbox name=semestre value="quarto">4º Semestre</label><br>
-            <label><input type=checkbox name=semestre value="quinto">5º Semestre </label>
-            <label><input type=checkbox name=semestre value="sexto">6º Semestre</label><br>
-            <label><input type=checkbox name=semestre value="setimo">7º Semestre </label>
-            <label><input type=checkbox name=semestre value="oitavo">8º Semestre</label><br>
-            <label><input type=checkbox name=semestre value="nono">9º Semestre </label>
-            <label><input type=checkbox name=semestre value="decimo">10º Semestre</label><br>
-          </div>
-        </div>
-       </form>
-      <button type="buttom" class="btn btn-default">Continuar</button>
-    </div>
-  </div>
-
+      </form>
+   </div>
+ </div>
  <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
       <div class="navbar-header">
@@ -185,6 +170,5 @@
       </div>
     </div>
   </nav>
-
 </body>
 </html>
