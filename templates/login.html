@@ -1,4 +1,4 @@
-usin<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Attendence List - Insper</title>
@@ -9,8 +9,14 @@ usin<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.js"></script>
+
 
   <script src="static/login.js"></script>
+  <script>
+  window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
 
 
   <!-- CSS -->
@@ -68,26 +74,28 @@ usin<!DOCTYPE html>
   <div class="container text-center centered">
     <div class="jumbotron transparent centered">
       <!--Home-->
-      <form role="form" method="post">
+      <form role="form" method="post" id="myform_home">
         <h1>Bem Vindo!</h1>
         <p>Se você já é cadastrado, faça login:</p>
         <div id = "home">
           <div class="form-group">
             <label for="email_login">Email:</label>
-            <input type="email" class="form-control" name="email" id="email" placeholder="Digite seu email" required>
+            <input type="email_login" class="form-control" name="email_login" id="email_login" placeholder="Digite seu email" required>
           </div>
           <div class="form-group">
             <label for="pwd">Senha:</label>
-            <input type="password_login" class="form-control" id="password" placeholder="Digite sua senha" required >
+            <input type="password_login" class="form-control" name="password_login" id="password_login" placeholder="Digite sua senha" required >
           </div>
           <div class="checkbox">
             <label><input type="checkbox"> Lembrar-me</label>
           </div>
-          <button name="login" type="btn" class="btn btn-default" value="login">Entrar</button>
+          <button type="submit" name="btn" type="btn" class="btn btn-default" value="login">Entrar</button>
           <p>e ainda não possui cadastro, registre-se:</p>
-          <button type="buttom" name = "btn" onclick="show('register1');hide('home');" class="btn btn-default">Registre-se</button>
+          <button type="button" name = "btn" onclick="show('register1');hide('home');" class="btn btn-default">Registre-se</button>
         </div>
+      </form>
       <!--Registro 1 -->
+      <form role="form" method="post" id="myform">
         <div style="display: none;" id = "register1">
           <div id="name_div" class="form-group">
             <label for="name">Nome:</label>
@@ -103,15 +111,15 @@ usin<!DOCTYPE html>
           </div>
           <p>Entrar como:</p>
             <div class="radio">
-              <label><input type=radio name="std_prof" value="aluno" required>Aluno</label>
-              <label><input type=radio name="std_prof" value="professor" required>Professor</label>
+              <label><input type=radio name="std_prof" value="aluno" >Aluno</label>
+              <label><input type=radio name="std_prof" value="professor" >Professor</label>
             </div>
-            <button type="button" name="btn" value="continuar" onclick="stdOrProf();" class="btn btn-default">Continuar</button>
+            <button type="button" id="btn_continue" value="continue" class="btn btn-default">Continuar</button>
         </div>
         <!--Registro Aluno-->
         <div style="display: none;" id = "register_std2">
           <div class="form-group">
-            <div class="radio">
+            <div class="radio" >
               <label><input type=radio name=curso value="1">Administração </label><br>
               <label><input type=radio name=curso value="2">Economia</label><br>
               <label><input type=radio name=curso value="3">Engenharia</label><br>
@@ -119,20 +127,20 @@ usin<!DOCTYPE html>
           </div>
           <p>Selecione o semestre:</p>
           <div class="form-group">
-            <div class="radio">
-              <label><input type=radio name=semestre value="1">1º Semestre </label>
-              <label><input type=radio name=semestre value="2">2º Semestre</label><br>
-              <label><input type=radio name=semestre value="3">3º Semestre </label>
-              <label><input type=radio name=semestre value="4">4º Semestre</label><br>
-              <label><input type=radio name=semestre value="5">5º Semestre </label>
-              <label><input type=radio name=semestre value="6">6º Semestre</label><br>
-              <label><input type=radio name=semestre value="7">7º Semestre </label>
-              <label><input type=radio name=semestre value="8">8º Semestre</label><br>
-              <label><input type=radio name=semestre value="9">9º Semestre </label>
-              <label><input type=radio name=semestre value="0">10º Semestre</label><br>
+            <div class="radio" >
+              <label><input type=radio name=semestre value="1" >1º Semestre </label>
+              <label><input type=radio name=semestre value="2" >2º Semestre</label><br>
+              <label><input type=radio name=semestre value="3" >3º Semestre </label>
+              <label><input type=radio name=semestre value="4" >4º Semestre</label><br>
+              <label><input type=radio name=semestre value="5" >5º Semestre </label>
+              <label><input type=radio name=semestre value="6" >6º Semestre</label><br>
+              <label><input type=radio name=semestre value="7" >7º Semestre </label>
+              <label><input type=radio name=semestre value="8" >8º Semestre</label><br>
+              <label><input type=radio name=semestre value="9" >9º Semestre </label>
+              <label><input type=radio name=semestre value="0" >10º Semestre</label><br>
             </div>
           </div>
-          <button type="submit" name="btn" class="btn btn-default">Concluir</button>
+          <button type="submit" name="btn" value"concluir" class="btn btn-default">Concluir</button>
         </div>
         <!--Registro Professor-->
         <div style="display: none;" id = "register_prof2">

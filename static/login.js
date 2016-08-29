@@ -1,3 +1,4 @@
+//JavaScript Functions
 function show(id){
   //alert("cheked the button - worked");
   document.getElementById(id).style.display= 'block' ;
@@ -25,3 +26,67 @@ function stdOrProf(){
     }
   }
 }
+
+//JQuery Functions
+$(document).ready(function () {
+    $('myFormHome').validate({
+        rules: {
+          email_login: {
+            required: true,
+            email: true
+          },
+          password_login: {
+            required: true,
+          }
+        }
+    });
+    $('#myform').validate({ // initialize the plugin
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                minlength: 6
+            },
+            name: {
+                required: true,
+            },
+            semestre: {
+                required: true,
+            },
+            curso: {
+                required: true,
+            }
+        },
+        messages: {
+            email: {
+                required: 'Escreva seu email',
+                email: 'Escreva um email válido'
+            },
+            password: {
+                required: "Escreva sua senha",
+                minlength: "Escreva uma senha de 6 dígitos no mínimo"
+            },
+            name: {
+              required: "Escreva seu nome"
+            },
+            semestre: {
+              required: ""
+            },
+            curso: {
+              required: ""
+            }
+        }
+    });
+    $('#btn_continue').click(function() {
+      if ($('#myform').valid()) {
+        stdOrProf();
+      }
+      else {
+
+      }
+    });
+
+});
