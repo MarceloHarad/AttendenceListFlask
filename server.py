@@ -7,13 +7,13 @@ from flask import Flask, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
 
-UPLOAD_FOLDER = '/home/marcelo/Documents/Insper/Tecnologicas Web/AttendenceListFlask/photos'
+UPLOAD_FOLDER = '/home/marcelo/Documents/Insper/Tecnologicas Web/AttendenceListFlask/static/images'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 db = SQLAlchemy(app)
-
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -34,9 +34,15 @@ def convertClassId(id):
         empred = Aula("Empreendedorismo Tecnologico", 10)
         db.session.add(empred)
         db.session.commit()
-        return str(tecweb.id) + str(camfis.id) + str(eletromag.id) + str(modcom.id) + str(empred.id)
+        return str(str(tecweb.id) + "," + str(camfis.id) + "," + str(eletromag.id) + "," +  str(modcom.id) + "," + str(empred.id))
     else:
         return ""
+
+
+def transformIdToName(id):
+    if id == 34:
+        return "Engenharia da Computacao, 4 Semestre"
+
 
 class Aula(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -59,13 +65,16 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False)
     isProfessor = db.Column(db.Boolean(), unique=False)
     classId = db.Column(db.String(120), unique=False)
-    #photoUrl = db.Column(db.String(120)), unique=True)
+    semesterName = db.Column(db.String(120), unique=False)
+    photoUrl = db.Column(db.String(120), unique=True)
 
-    def __init__(self, name, email,password, isProfessor):
+    def __init__(self, name, email,password, isProfessor, semesterName, photoUrl):
         self.name = name
         self.email = email
         self.password = password
         self.isProfessor = isProfessor
+        self.semesterName = semesterName
+        self.photoUrl = photoUrl
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -73,6 +82,7 @@ def root():
     if request.method == 'POST':
         #FINAL DO CADASTRO
         if request.form["btn"] == "concluir":
+            print("Concluir")
             name = request.form["name"]
             email = request.form["email"]
             password = request.form["password"]
@@ -80,22 +90,49 @@ def root():
             semester = request.form["semestre"]
             classId = int(course + semester)
             isProfessor = False
-            user = User(name = name, email= email, password= password, isProfessor = isProfessor)
+            semesterName = transformIdToName(classId)
+            # check if the post request has the file part
+            if 'file' not in request.files:
+                print("NOFILE")
+                return render_template('login.html')
+            file = request.files['file']
+            # if user does not select file, browser also
+            # submit a empty part without filename
+            if file.filename == '':
+                print("NOFILENAME")
+                return render_template('login.html')
+            if file and allowed_file(file.filename):
+                filename = email
+                print(file.content_type)
+                photoUrl = filename
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], email))
+            user = User(name = name, email= email, password= password, isProfessor = isProfessor, semesterName = semesterName, photoUrl = photoUrl)
             user.classId = convertClassId(classId)
             db.session.add(user)
             db.session.commit()
             return render_template('login.html')
         #TENTATIVA DE LOGIN
         elif request.form["btn"] == "login":
+            print("Login")
             login = request.form["email_login"]
             password = request.form["password_login"]
             user = User.query.filter_by(email=login).first()
             if user.password == password:
-                #O QUE ACONTECE DEPOIS DO LOGIN
-                return user.name + " e-mail: &lt;" + user.email + "&gt;"
+                if not user.isProfessor:
+                    #O QUE ACONTECE DEPOIS DO LOGIN
+                    idAulas = user.classId.strip().split(",")
+                    Aulas = []
+                    for i in idAulas:
+                        aula = Aula.query.filter_by(id = i).first()
+                        Aulas.append(aula)
+                    return render_template('aluno.html', aulas = Aulas, user = user)
+                else:
+                    return "Usuário não encontrado",404
             else:
                 #CASO LOGIN DE ERRADO
                 return "Usuário não encontrado",404
+        else:
+            return render_template('login.html')
     else:
         return render_template('login.html')
 

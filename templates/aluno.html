@@ -25,18 +25,16 @@
      }
 
   .margin {margin-bottom: 45px;}
-  
+
   .bg-1 {
       font-family: 'Open Sans Condensed', sans-serif;
       line-height: 1.8;
       color: #2f2f2f;
-      background:url('insper.jpg')no-repeat;
       background-size: 105%;
-
   }
 
   .bg-2 {
-      background-color: #ffffff; 
+      background-color: #ffffff;
       color: #2f2f2f;
       font-size: 20px;;
   }
@@ -46,7 +44,7 @@
       padding-bottom: 70px;
     }
 
-  .transparent{    
+  .transparent{
     background-color: rgba(255,255,255,0.7);
     width: 1350px;
     vertical-align: center;
@@ -66,6 +64,15 @@
   .navbar-nav  li a:hover {
       color: #1abc9c !important;
   }
+
+  .menu1 {
+    background-color: #cfcfc4
+    opacity: 0.7
+  }
+
+  .remove-all-margin{
+  margin:0 ! important;
+  }
   </style>
 </head>
 <body>
@@ -84,7 +91,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#perfil">PERFIL</a></li>
           <li><a href="#frequencia">FREQUÊNCIA</a></li>
-          <li><a href="login.html">SAIR</a></li>
+          <li><a href="">SAIR</a></li>
         </ul>
       </div>
     </div>
@@ -94,15 +101,15 @@
   <a id="perfil"></a>
   <div class="container bg-1 text-center transparent ">
     <a id="perfil"></a>
-    <div class="jumbotron transparent">
+    <div class="jumbotron transparent, menu1">
       <br>
       <br>
       <br>
       <div class="row">
       <div class="col-sm-6">
         <br>
-        <h3>Pedro Cunial</h3>
-        <img src="https://yt3.ggpht.com/-RfG8HlabOBA/AAAAAAAAAAI/AAAAAAAAAAA/-lydBbbpfNA/s900-c-k-no-rj-c0xffffff/photo.jpg" class="img-circle" alt="foto-perfil" width="125" height="125"><p>Engenharia da Computação, 4 º semestre. </p>
+        <h3>{{user.name}}</h3>
+        <img src= "{{ url_for('static', filename = 'photos/' + user.photoUrl ) }}" class="img-circle " alt="foto-perfil" width="125" height="125"><p>{{user.semesterName}}</p>
       </div>
       <div class=col-sm-6>
         <h3 class="margin">Confirmar presença em aula</h3>
@@ -114,16 +121,8 @@
         <button type="button" class="btn-lg btn disabled">Assinar Lista</button>
       </div>
     </div>
-  </div> 
-
-  <nav class="navbar navbar-default">
-    <a id="frequencia"></a>
-      <div class="container">
-        <div class="navbar-header">
-        </div>
-      </div>
-  </nav>
-
+  </div>
+<hr></hr>
 <!-- Frequencia -->
 <a id="frequencia"></a>
 <div class="container-fluid bg-3 text-center">
@@ -138,33 +137,15 @@
       </tr>
     </thead>
     <tbody>
+      {% for aula in aulas %}
       <tr>
-        <td>Tecnologias Web</td>
-        <td>2</td>
-        <td>70%</td>
+        <td>{{aula.nome}}</td>
+        <td>{{aula.numFaltas}}</td>
+        <td>{{(1 - aula.numFaltas/aula.numAulas) * 100}} %</td>
       </tr>
- <tr>
-        <td>Empreendedorismo Tecnológico</td>
-        <td>0</td>
-        <td>100%</td>
-      </tr>
- <tr>
-        <td>Eletromagnetismo e Ondulatória</td>
-        <td>0</td>
-        <td>100%</td>
-      </tr>
- <tr>
-        <td>Camada Física da Computação</td>
-        <td>5</td>
-        <td>55%</td>
-      </tr>
- <tr>
-        <td>Modelagem e Controle</td>
-        <td>2</td>
-        <td>70%</td>
-      </tr>
+      {% endfor %}
   <br>
-  <br>    
+  <br>
 </div>
 
  <nav class="navbar navbar-default navbar-fixed-bottom">
