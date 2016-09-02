@@ -38,8 +38,20 @@ $(document).ready(function () {
           password_login: {
             required: true,
           }
+        },
+
+        messages: {
+          email_login: {
+              required: 'Escreva seu email',
+              email: 'Escreva um email válido'
+          },
+          password_login: {
+            required: "Escreva sua senha",
+            minlength: "Escreva uma senha de 6 dígitos no mínimo"
+          }
         }
     });
+
     $('#myform').validate({ // initialize the plugin
         rules: {
             email: {
@@ -57,6 +69,9 @@ $(document).ready(function () {
                 required: true,
             },
             curso: {
+                required: true,
+            },
+            file: {
                 required: true,
             }
         },
@@ -77,6 +92,9 @@ $(document).ready(function () {
             },
             curso: {
               required: ""
+            },
+            file: {
+              required: ""
             }
         }
     });
@@ -88,5 +106,9 @@ $(document).ready(function () {
 
       }
     });
+});
 
+$(".js-example-basic-multiple").select2({
+  placeholder: "Escolha suas aulas",
+  allowClear: true
 });

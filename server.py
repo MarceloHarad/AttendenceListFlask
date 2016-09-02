@@ -7,7 +7,7 @@ from flask import Flask, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
 
-UPLOAD_FOLDER = '/home/marcelo/Documents/Insper/Tecnologicas Web/AttendenceListFlask/static/images'
+UPLOAD_FOLDER = '/home/marcelo/Documents/Insper/Tecnologicas Web/AttendenceListFlask/static/photosx'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -116,20 +116,23 @@ def root():
             print("Login")
             login = request.form["email_login"]
             password = request.form["password_login"]
-            user = User.query.filter_by(email=login).first()
-            if user.password == password:
-                if not user.isProfessor:
-                    #O QUE ACONTECE DEPOIS DO LOGIN
-                    idAulas = user.classId.strip().split(",")
-                    Aulas = []
-                    for i in idAulas:
-                        aula = Aula.query.filter_by(id = i).first()
-                        Aulas.append(aula)
-                    return render_template('aluno.html', aulas = Aulas, user = user)
+            try:
+                user = User.query.filter_by(email=login).first()
+                if user.password == password:
+                    if not user.isProfessor:
+                        #O QUE ACONTECE DEPOIS DO LOGIN
+                        idAulas = user.classId.strip().split(",")
+                        Aulas = []
+                        for i in idAulas:
+                            aula = Aula.query.filter_by(id = i).first()
+                            Aulas.append(aula)
+                        return render_template('aluno.html', aulas = Aulas, user = user)
+                    else:
+                        return "Usuário não encontrado",404
                 else:
+                    #CASO LOGIN DE ERRADO
                     return "Usuário não encontrado",404
-            else:
-                #CASO LOGIN DE ERRADO
+            except:
                 return "Usuário não encontrado",404
         else:
             return render_template('login.html')

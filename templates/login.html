@@ -5,6 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link rel="shortcut icon" href="{{ url_for('static', filename='insper.ico') }}">
+
+
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -12,11 +15,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.js"></script>
 
-  <script src="static/login.js"></script>
-  <script>
-  window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
-</script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
+  <script src="static/login.js"></script>
 
   <!-- CSS -->
   <style>
@@ -54,6 +56,9 @@
       color: #1abc9c !important;
   }
 
+  .top-buffer {
+    margin-top:20px; }
+
   </style>
   <!--End CSS-->
 
@@ -66,18 +71,18 @@
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand p2" href="#">ATTENDENCE LIST</a>
+        <a class="navbar-brand p2" href="">ATTENDENCE LIST</a>
       </div>
     </div>
   </nav>
 
-  <div class="container text-center centered">
+  <div class="container text-center centered top-buffer">
     <div class="jumbotron transparent centered">
       <!--Home-->
       <form role="form" method="post" id="myform_home" >
-        <h1>Bem Vindo!</h1>
-        <p>Se você já é cadastrado, faça login:</p>
         <div id = "home">
+          <h1>Bem Vindo!</h1>
+          <p>Se você já é cadastrado, faça login:</p>
           <div class="form-group">
             <label for="email_login">Email:</label>
             <input type="email_login" class="form-control" name="email_login" id="email_login" placeholder="Digite seu email" required>
@@ -90,13 +95,15 @@
             <label><input type="checkbox"> Lembrar-me</label>
           </div>
           <button type="submit" name="btn" class="btn btn-default" value="login">Entrar</button>
-          <p>e ainda não possui cadastro, registre-se:</p>
+          <p>e se ainda não possui cadastro, registre-se:</p>
           <button type="button" name = "btn" onclick="show('register1');hide('home');" class="btn btn-default">Registre-se</button>
         </div>
       </form>
       <!--Registro 1 -->
       <form role="form" method="post" enctype=multipart/form-data id="myform">
         <div style="display: none;" id = "register1">
+          <h1>Bem Vindo!</h1>
+          <p>Preencha o formulário por favor</p>
           <div id="name_div" class="form-group">
             <label for="name">Nome:</label>
             <input type="name" class="form-control" name="name" required>
@@ -125,6 +132,8 @@
         </div>
         <!--Registro Aluno-->
         <div style="display: none;" id = "register_std2">
+          <h1>Bem Vindo!</h1>
+          <p>Preencha o formulário por favor</p>
           <div class="form-group">
             <div class="radio" >
               <label><input type=radio name=curso value="1">Administração </label><br>
@@ -151,29 +160,26 @@
         </div>
         <!--Registro Professor-->
         <div style="display: none;" id = "register_prof2">
-          <div class="form-group">
-            <div class="checkbox">
-              <label><input type=checkbox name=curso value="administração">Administração </label><br>
-              <label><input type=checkbox name=curso value="economia">Economia</label><br>
-              <label><input type=checkbox name=curso value="engenharia">Engenharia</label><br>
-            </div>
-          </div>
-          <p>Selecione o semestre:</p>
-          <div class="form-group">
-            <div class="checkbox">
-              <label><input type=checkbox name=semestre value="primeiro">1º Semestre </label>
-              <label><input type=checkbox name=semestre value="segundo">2º Semestre</label><br>
-              <label><input type=checkbox name=semestre value="terceiro">3º Semestre </label>
-              <label><input type=checkbox name=semestre value="quarto">4º Semestre</label><br>
-              <label><input type=checkbox name=semestre value="quinto">5º Semestre </label>
-              <label><input type=checkbox name=semestre value="sexto">6º Semestre</label><br>
-              <label><input type=checkbox name=semestre value="setimo">7º Semestre </label>
-              <label><input type=checkbox name=semestre value="oitavo">8º Semestre</label><br>
-              <label><input type=checkbox name=semestre value="nono">9º Semestre </label>
-              <label><input type=checkbox name=semestre value="decimo">10º Semestre</label><br>
-            </div>
-          </div>
-        </div>
+          <h1>Bem Vindo!</h1>
+          <p>Preencha o formulário por favor</p>
+          <script type="text/javascript">
+            $(document).ready(function() {
+              $(".js-example-basic-multiple").select2({
+                placeholder: "Escolha suas aulas",
+              });
+            });
+          </script>
+          <select class="js-example-basic-multiple" multiple="multiple" style="width: 300px">
+            <optgroup label="Administracao">
+              <option value="AL">Alabama</option>
+              <option value="WY">Wyoming</option>
+            <optgroup label="Economia">
+              <option value="1"> Calculo 1</option>
+              <option value="2"> Calculo 2</option>
+            <optgroup label="Engenharia">
+              <option value="3"> Matematica da Variacao</option>
+              <option value="4"> Eletromagnetismo</option>
+          </select>
       </form>
    </div>
  </div>
