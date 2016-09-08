@@ -113,18 +113,12 @@
         <img src= "{{ url_for('static', filename = 'photos/' + user.photoUrl ) }}" class="img-circle" alt="foto-perfil" width="125" height="125">
         <p>{{user.semesterName}}</p>
       </div>
-       <div class="col-sm-6">
-        <table class="table table-hover text-center">
-          <thead class="text-center">
-        <tr>
-          <th class="p2 text-center">Matérias</th>
-        </tr>
-      </thead>
-        <tr>
-          {% for aula in aulas %}
-          <td>{{aula}}</td>
-        </tr>
-        </table>
+      <div class="container">
+        <h2>Materias</h2>
+        {% for aula in aulas %}
+        <button type="button" class="btn btn-default" style="width: 300px">{{aula}}</button>
+        <p></p>
+        {% endfor %}
       </div>
 
     </div>

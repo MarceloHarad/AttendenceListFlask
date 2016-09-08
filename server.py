@@ -92,6 +92,7 @@ def root():
             classId = int(course + semester)
             isProfessor = False
             semesterName = transformIdToName(classId)
+
             # check if the post request has the file part
             if 'file' not in request.files:
                 print("NOFILE")
@@ -107,6 +108,7 @@ def root():
                 print(file.content_type)
                 photoUrl = filename
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], email))
+
             user = User(name = name, email= email, password= password, isProfessor = isProfessor, semesterName = semesterName, photoUrl = photoUrl)
             user.classId = convertClassId(classId)
             db.session.add(user)
@@ -123,6 +125,7 @@ def root():
             listClass = [str(y) for y in listClass]
             stringClass = ','.join(map(str, listClass))
             isProfessor = True
+
             # check if the post request has the file part
             if 'file' not in request.files:
                 print("NOFILE")
@@ -138,6 +141,7 @@ def root():
                 print(file.content_type)
                 photoUrl = filename
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], email))
+
             user = User(name = name, email= email, password= password, isProfessor = isProfessor, semesterName = "Professor", photoUrl = photoUrl)
             user.classId = stringClass
             db.session.add(user)
@@ -149,33 +153,35 @@ def root():
             print("Login")
             login = request.form["email_login"]
             password = request.form["password_login"]
-            try:
-                user = User.query.filter_by(email=login).first()
-                if user.password == password:
-                    if not user.isProfessor:
+            #try:
+            user = User.query.filter_by(email=login).first()
+            if user.password == password:
+                if not user.isProfessor:
 
-                        #O QUE ACONTECE DEPOIS DO LOGIN PARA ALUNO
-                        idAulas = user.classId.strip().split(",")
-                        Aulas = []
-                        for i in idAulas:
-                            aula = Aula.query.filter_by(id = i).first()
-                            Aulas.append(aula)
-                        return render_template('aluno.html', aulas = Aulas, user = user)
-                    elif user.isProfessor:
-
-                        #O QUE ACONTECE DEPOIS DO LOGIN PARA Professor
-                        idAulas = user.classId.strip().split(",")
-                        Aulas = []
-                        for i in idAulas:
-                            Aulas.append(i)
-                        return render_template('professor_inicial.html', aulas = Aulas, user = user)
+                    #O QUE ACONTECE DEPOIS DO LOGIN PARA ALUNO
+                    idAulas = user.classId.strip().split(",")
+                    Aulas = []
+                    for i in idAulas:
+                        aula = Aula.query.filter_by(id = i).first()
+                        Aulas.append(aula)
+                    return render_template('aluno.html', aulas = Aulas, user = user)
                 else:
-                    print("ERRO PASSWORD")
-                    #CASO LOGIN DE ERRADO
-                    return "Usuário não encontrado",404
-            except:
-                print("ERRO TRY EXCEPT")
+
+                    #O QUE ACONTECE DEPOIS DO LOGIN PARA Professor
+                    idAulas = user.classId.strip().split(",")
+                    Aulas = []
+                    for i in idAulas:
+                        Aulas.append(i)
+                    print(Aulas)
+                    return render_template('professor_inicial.html', aulas = Aulas, user = user)
+            else:
+                print("ERRO PASSWORD")
+                #CASO SENHA DE ERRADO
                 return "Usuário não encontrado",404
+            #except:
+                #ERRO NO QUERY DO USUARIO
+                #print("ERRO TRY EXCEPT")
+                #return "Usuário não encontrado",404
         else:
             return render_template('login.html')
     else:
