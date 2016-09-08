@@ -114,11 +114,14 @@
         <p>{{user.semesterName}}</p>
       </div>
       <div class="container">
-        <h2>Materias</h2>
-        {% for aula in aulas %}
-        <button type="button" class="btn btn-default" style="width: 300px">{{aula}}</button>
-        <p></p>
-        {% endfor %}
+        <p class="p2">Materias</p>
+        <form role="form" method="post" id="form_classes_prof">
+          <input type="hidden" name="email_professor" value = {{user.email}}>
+          {% for aula in aulas %}
+          <button name = "btn" value = "{{ aula }}" type="submit" class="btn btn-default" style="width: 300px">{{aula}}</button>
+          <p></p>
+          {% endfor %}
+        </form>
       </div>
 
     </div>

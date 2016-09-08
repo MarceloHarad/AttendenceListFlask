@@ -25,7 +25,7 @@
      }
 
   .margin {margin-bottom: 45px;}
-  
+
   .bg-1 {
       font-family: 'Open Sans Condensed', sans-serif;
       line-height: 1.8;
@@ -35,7 +35,7 @@
       width: fixed;
   }
   .bg-2 {
-      background-color: #ffffff; 
+      background-color: #ffffff;
       color: #2f2f2f;
       font-size: 20px;;
   }
@@ -45,12 +45,12 @@
       padding-bottom: 70px;
     }
 
-     .transparent{    
+     .transparent{
     background-color: rgba(255,255,255,0.7);
     width: 1350px;
     vertical-align: center;
    }
- 
+
 
   .navbar {
       padding-top: 15px;
@@ -67,6 +67,7 @@
       color: #1abc9c !important;
   }
   </style>
+
 </head>
 <body>
   <!-- Menu -->
@@ -84,7 +85,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#perfil">PERFIL</a></li>
           <li><a href="#frequencia">CHAMADA</a></li>
-          <li><a href="login.html">SAIR</a></li>
+          <li><a href="">SAIR</a></li>
         </ul>
       </div>
     </div>
@@ -100,10 +101,10 @@
       <br>
       <div class="row">
       <div class="col-sm-6">
-        <h3>Luciano Soares</h3>
-        <img src="https://avatars2.githubusercontent.com/u/1945076?v=3&s=460" class="img-circle" alt="foto-perfil" width="125" height="125">
-        <p>Engenharia da computação, professor. </p>
-        <p>Tecnologias Web, 4º semestre. </p>
+        <h3>{{user.name}}</h3>
+        <img src="{{ url_for('static', filename = 'photos/' + user.photoUrl ) }}"  class="img-circle" alt="foto-perfil" width="125" height="125">
+        <p>{{user.semesterName}}</p>
+        <p>{{nome_aula}}</p>
       </div>
       <div class=col-sm-6>
         <h3 class="margin">Fazer chamada</h3>
@@ -130,7 +131,7 @@
     <br>
     <br>
     <br>
-  </div> 
+  </div>
 
   <nav class="navbar navbar-default">
     <a id="frequencia"></a>
@@ -144,8 +145,8 @@
 <div class="container-fluid bg-2 text-center">
   <h3 class="margin p2">Lista de presença</h3>
   <p> Abaixo a lista de alunos que compareceram à sua aula:</p>
-  <p> TECNOLOGIAS WEB</p>
-  <p> 18/08</p>
+  <p>{{nome_aula}}}</p>
+  <p>{{date}}</p>
   <table class="table table-hover text-center">
       <thead class="text-center">
         <tr>
@@ -154,71 +155,17 @@
         </tr>
       </thead>
       <tbody>
+        {% for aula in aulas %}
         <tr>
-          <td>André de Marco Toyama</td>
-          <td>Ausente</td>
+          <td>{{aula.nameStudent}}</td>
+          <td>{{aula.isActive}}</td>
         </tr>
-        <tr>
-          <td>Antonio Lacombe Sigrist</td>
-          <td>Presente</td>
-        </tr>
-        <tr>
-          <td>Carlos Eduardo Puttini Rosa</td>
-          <td>Presente</td>
-        </tr>
-         <tr>
-          <td>Felipe Frid Buniac</td>
-          <td>Ausente</td>
-        </tr>
-         <tr>
-          <td>Gabriela Cintra de Freitas Almeida</td>
-          <td>Presente</td>
-        </tr>
-        <tr>
-          <td>Gabriel do Vale Rios</td>
-          <td>Presente</td>
-        </tr>
-        <tr>
-          <td>Gustavo Efeiche</td>
-          <td>Presente</td>
-        </tr>
-        <tr>
-          <td>João Pedro Pieroni de Castro </td>
-          <td>Presente</td>
-        </tr>
-        <tr>
-          <td>Khalil Yassine Yassine</td>
-          <td>Presente</td>
-        </tr>
-        <tr>
-          <td>Lucas Scarlato Astur</td>
-          <td>Presente</td>
-        </tr>
-        <tr>
-          <td>Marcelo Gianfaldoni de Andrade</td>
-          <td>Presente</td>
-        </tr>
-        <tr>
-          <td>Matheus Dias Marotzke Dib</td>
-          <td>Presente</td>
-        </tr>
-        <tr>
-          <td>Pedro Cunial Campos</td>
-          <td>Presente</td>
-        </tr>
-        <tr>
-          <td>Rachel Pereira Bottino de Moraes</td>
-          <td>Presente</td>
-        </tr>
-        <tr>
-          <td>Rafael Molines Ismael</td>
-          <td>Presente</td>
-        </tr>
+        {% endfor %}
       </table>
       <button type="button" class="btn-lg btn-default">Alterar</button>
           <br>
           <br>
-          <button type="button" class="btn-lg btn-default">Confirmar</button>    
+          <button type="button" class="btn-lg btn-default">Confirmar</button>
   </div>
   <br>
   <br>
