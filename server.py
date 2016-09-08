@@ -22,7 +22,46 @@ def allowed_file(filename):
 
 def convertClassId(id):
     #Converte o ID do Semestre e Curso para uma lista de classes
-    if id == 34:
+    if id == 31:
+        desoft = Aula("Design de Software", 10)
+        db.session.add(desoft)
+        natdes = Aula("Natureza do Design", 10)
+        db.session.add(natdes)
+        modsim = Aula("Modelagem e Simulação do Mundo Físico", 10)
+        db.session.add(modsim)
+        instmed = Aula("Instrumentação e Medição", 10)
+        db.session.add(instmed)
+        gde = Aula("Grandes Desafios da Engenhariia", 10)
+        db.session.add(gde)
+        db.session.commit()
+        return str(str(desoft.id) + "," + str(natdes.id) + "," + str(modsim.id) + "," +  str(instmed.id) + "," + str(gde.id))
+    elif id == 32:
+        codesign = Aula("Codesign de Apps", 10)
+        db.session.add(codesign)
+        fismov = Aula("Física do Movimento", 10)
+        db.session.add(fismov)
+        acion = Aula("Acionamentos Elétricos", 10)
+        db.session.add(acion)
+        cdados = Aula("Ciência dos Dados", 10)
+        db.session.add(cdados)
+        matvar = Aula("Matemática da Variação", 10)
+        db.session.add(matvar)
+        db.session.commit()
+        return str(str(codesign.id) + "," + str(fismov.id) + "," + str(acion.id) + "," +  str(cdados.id) + "," + str(matvar.id))
+    elif id == 33:
+        desagil = Aula("Desenvolvimento Colaborativo Ágil", 10)
+        db.session.add(desagil)
+        rob = Aula("Robótica Computacional", 10)
+        db.session.add(rob)
+        elesist = Aula("Elementos do Sistema", 10)
+        db.session.add(elesist)
+        matmult = Aula("Matemática Multivariada", 10)
+        db.session.add(matmult)
+        descmat = Aula("Desconstruindo a Materia", 10)
+        db.session.add(descmat)
+        db.session.commit()
+        return str(str(desagil.id) + "," + str(rob.id) + "," + str(elesist.id) + "," +  str(matmult.id) + "," + str(descmat.id))
+    elif id == 34:
         tecweb = Aula("Tecnologias Web", 10)
         db.session.add(tecweb)
         camfis = Aula("Camada Fisica da Computacao", 10)
