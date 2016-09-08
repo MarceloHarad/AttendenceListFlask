@@ -7,7 +7,7 @@ from flask import Flask, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
 
-UPLOAD_FOLDER = '/home/marcelo/Documents/Insper/Tecnologicas Web/AttendenceListFlask/static/photosx'
+UPLOAD_FOLDER = '/home/marcelo/Documents/Insper/Tecnologicas Web/AttendenceListFlask/static/photos'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -80,7 +80,8 @@ class User(db.Model):
 @app.route("/", methods=['GET', 'POST'])
 def root():
     if request.method == 'POST':
-        #FINAL DO CADASTRO
+
+        #FINAL DO CADASTRO ALUNO
         if request.form["btn"] == "concluir":
             print("Concluir")
             name = request.form["name"]
@@ -111,6 +112,38 @@ def root():
             db.session.add(user)
             db.session.commit()
             return render_template('login.html')
+
+        #FINAL DO CADASTRO PROFESSOR
+        elif request.form["btn"] == "concluir2":
+            print("Concluir")
+            name = request.form["name"]
+            email = request.form["email"]
+            password = request.form["password"]
+            listClass = request.form.getlist("class_prof")
+            listClass = [str(y) for y in listClass]
+            stringClass = ','.join(map(str, listClass))
+            isProfessor = True
+            # check if the post request has the file part
+            if 'file' not in request.files:
+                print("NOFILE")
+                return render_template('login.html')
+            file = request.files['file']
+            # if user does not select file, browser also
+            # submit a empty part without filename
+            if file.filename == '':
+                print("NOFILENAME")
+                return render_template('login.html')
+            if file and allowed_file(file.filename):
+                filename = email
+                print(file.content_type)
+                photoUrl = filename
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], email))
+            user = User(name = name, email= email, password= password, isProfessor = isProfessor, semesterName = "Professor", photoUrl = photoUrl)
+            user.classId = stringClass
+            db.session.add(user)
+            db.session.commit()
+            return render_template('login.html')
+
         #TENTATIVA DE LOGIN
         elif request.form["btn"] == "login":
             print("Login")
@@ -120,19 +153,28 @@ def root():
                 user = User.query.filter_by(email=login).first()
                 if user.password == password:
                     if not user.isProfessor:
-                        #O QUE ACONTECE DEPOIS DO LOGIN
+
+                        #O QUE ACONTECE DEPOIS DO LOGIN PARA ALUNO
                         idAulas = user.classId.strip().split(",")
                         Aulas = []
                         for i in idAulas:
                             aula = Aula.query.filter_by(id = i).first()
                             Aulas.append(aula)
                         return render_template('aluno.html', aulas = Aulas, user = user)
-                    else:
-                        return "Usuário não encontrado",404
+                    elif user.isProfessor:
+
+                        #O QUE ACONTECE DEPOIS DO LOGIN PARA Professor
+                        idAulas = user.classId.strip().split(",")
+                        Aulas = []
+                        for i in idAulas:
+                            Aulas.append(i)
+                        return render_template('professor_inicial.html', aulas = Aulas, user = user)
                 else:
+                    print("ERRO PASSWORD")
                     #CASO LOGIN DE ERRADO
                     return "Usuário não encontrado",404
             except:
+                print("ERRO TRY EXCEPT")
                 return "Usuário não encontrado",404
         else:
             return render_template('login.html')

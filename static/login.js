@@ -52,15 +52,23 @@ $(document).ready(function () {
         }
     });
 
+    jQuery.validator.addMethod(
+        "emailInsper",
+        function(value, element) {
+            return (element.value.includes("insper"));
+        },
+        "Use a valid username."
+    );
+
     $('#myform').validate({ // initialize the plugin
         rules: {
             email: {
                 required: true,
-                email: true
+                email: true,
             },
             password: {
                 required: true,
-                minlength: 6
+                minlength: 6,
             },
             name: {
                 required: true,
@@ -106,9 +114,4 @@ $(document).ready(function () {
 
       }
     });
-});
-
-$(".js-example-basic-multiple").select2({
-  placeholder: "Escolha suas aulas",
-  allowClear: true
 });
