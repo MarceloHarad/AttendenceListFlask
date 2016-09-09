@@ -90,6 +90,7 @@ class Aula(db.Model):
     numAulas = db.Column(db.Integer(), unique=False)
     numFaltas = db.Column(db.Integer(), unique=False)
     isActive = db.Column(db.Boolean(), unique=False)
+    isPresent = db.Column(db.Boolean(), unique=False)
     nameStudent = db.Column(db.String(80), unique=False)
 
     def __init__(self,nome,numAulas,nameStudent):
@@ -98,6 +99,7 @@ class Aula(db.Model):
         self.numFaltas = 0
         self.isActive = False
         self.nameStudent = nameStudent
+        self.isPresent = False
 
 
 class User(db.Model):
@@ -205,7 +207,11 @@ def root():
                     for i in idAulas:
                         aula = Aula.query.filter_by(id = i).first()
                         Aulas.append(aula)
-                    return render_template('aluno.html', aulas = Aulas, user = user)
+                    aula_ativa = False
+                    for i in Aulas:
+                        if i.isActive:
+                            aula_ativa = True
+                    return render_template('aluno.html', aulas = Aulas, user = user, aula_ativa = aula_ativa)
                 else:
 
                     #O QUE ACONTECE DEPOIS DO LOGIN PARA Professor
@@ -222,8 +228,36 @@ def root():
                 #CASO SENHA DE ERRADO
                 return "Usuário não encontrado",404
 
+        elif request.form["btn"] == "open_list":
+            print("open_list")
+            classe = request.form["aulas"]
+            list_classes = Aula.query.filter_by(nome=classe).all()
+            for i in list_classes:
+                i.isActive = True
+            db.session.commit()
+            return render_template('login.html')
+
+        elif request.form["btn"] == "close_list":
+            print("close_list")
+            classe = request.form["aulas"]
+            list_classes = Aula.query.filter_by(nome=classe).all()
+            for i in list_classes:
+                print(i)
+                i.isActive = False
+            db.session.commit()
+            return render_template('login.html')
+
+        elif request.form["btn"] == "sign":
+            print("sign")
+            id_aula = request.form["aulas_aluno"]
+            aula = Aula.query.filter_by(id=int(id_aula)).first()
+            aula.isPresent = True
+            print(aula.nome)
+            db.session.commit()
+            return render_template('login.html')
+
         elif request.form["btn"] != None:
-            print("BOTAO FUNCIONOU")
+            ("NONE")
             classe = request.form["btn"]
             list_classes = Aula.query.filter_by(nome=classe).all()
             email = request.form["email_professor"]
@@ -232,6 +266,7 @@ def root():
             return render_template('professor.html', aulas = list_classes, user = user, date = date, nome_aula = classe)
 
         else:
+            print("else")
             return render_template('login.html')
     else:
         return render_template('login.html')

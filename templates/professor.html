@@ -109,22 +109,25 @@
       <div class=col-sm-6>
         <h3 class="margin">Fazer chamada</h3>
         <p> Você está em horário de aula:</p>
-        <button type="button" class="btn-lg btn-default"> Abrir lista</button>
-        <br>
-        <br>
-        <button type="button" class="btn-lg btn disabled">Fechar lista</button>
+        {% if not aulas[0].isActive %}
+        <form role="form" method="post" id="open_list">
+          <input type="hidden" name="aulas" value = "{{ nome_aula }}" >
+          <button type="submit" name = "btn" class="btn-lg btn-default" value="open_list"> Abrir lista</button>
+          <br>
+          <br>
+          <button type="button" class="btn-lg btn disabled">Fechar lista</button>
+        </form>
+        {% endif %}
+        {% if aulas[0].isActive %}
+        <form role="form" method="post" id="close_list">
+          <input type="hidden" name="aulas" value =  "{{ nome_aula }}" >
+          <button type="button" class="btn-lg btn disabled"> Abrir lista</button>
+          <br>
+          <br>
+          <button type="submit" name = "btn" class="btn-lg btn-default" value="close_list">Fechar lista</button>
+        </form>
+        {% endif %}
 
-        <!--<p> Você está em horário de aula:</p>
-        <button type="button" class="btn-lg btn disabled"> Abrir lista</button>
-        <br>
-        <br>
-        <button type="button" class="btn-lg btn-default">Fechar lista</button>-->
-
-        <!--<p> Você não está em horário de aula:</p>
-        <button type="button" class="btn-lg btn disabled"> Abrir Lista</button>
-        <br>
-        <br>
-        <button type="button" class="btn-lg btn disabled">Fechar Lista</button>-->
       </div>
     </div>
     </div>
@@ -145,9 +148,10 @@
 <div class="container-fluid bg-2 text-center">
   <h3 class="margin p2">Lista de presença</h3>
   <p> Abaixo a lista de alunos que compareceram à sua aula:</p>
-  <p>{{nome_aula}}}</p>
+  <p>{{nome_aula}}</p>
   <p>{{date}}</p>
-  <table class="table table-hover text-center">
+  <table class="table table-hover te
+  xt-center">
       <thead class="text-center">
         <tr>
           <th class="p2 text-center">Aluno</th>
@@ -158,14 +162,16 @@
         {% for aula in aulas %}
         <tr>
           <td>{{aula.nameStudent}}</td>
-          <td>{{aula.isActive}}</td>
+          <td>{{aula.isPresent}}</td>
+          {% if aula.isPresent %}
+            <td>
+              <a href="#" class="btn-sm btn-default">
+                <span class="glyphicon glyphicon-remove-sign"></span>
+            </td>
+          {% endif %}
         </tr>
         {% endfor %}
       </table>
-      <button type="button" class="btn-lg btn-default">Alterar</button>
-          <br>
-          <br>
-          <button type="button" class="btn-lg btn-default">Confirmar</button>
   </div>
   <br>
   <br>

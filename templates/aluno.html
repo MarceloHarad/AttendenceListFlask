@@ -116,12 +116,23 @@
       </div>
       <div class=col-sm-6>
         <h3 class="margin">Confirmar presença em aula</h3>
-        <!--<p> Você está em horário de aula:</p>
-        <br>
-        <button type="button" class="btn-lg btn-default">Assinar lista</button>-->
+        {% if aula_ativa %}
+          <p> Você está em horário de aula:</p>
+          <br>
+          <form role="form" method="post" id="sign_list">
+            {% for i in aulas %}
+              {% if i.isActive %}
+                <input type="hidden" name="aulas_aluno" value = {{i.id}} >
+              {% endif %}
+            {% endfor %}
+            <button  name="btn" type="submit" class="btn-lg btn-default" value="sign" >Assinar lista</button>
+          </form>
+        {% endif %}
+        {% if not aula_ativa %}
         <p> Você não está em horário de aula:</p>
         <br>
         <button type="button" class="btn-lg btn disabled">Assinar Lista</button>
+        {% endif %}
       </div>
     </div>
   </div>
