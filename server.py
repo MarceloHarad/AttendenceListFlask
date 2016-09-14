@@ -211,7 +211,10 @@ def root():
                     for i in Aulas:
                         if i.isActive:
                             aula_ativa = True
-                    return render_template('aluno.html', aulas = Aulas, user = user, aula_ativa = aula_ativa)
+                            nome_aula = i.nome
+                    if not aula_ativa:
+                        nome_aula = ""
+                    return render_template('aluno.html', aulas = Aulas, user = user, aula_ativa = aula_ativa, nome_aula = nome_aula)
                 else:
 
                     #O QUE ACONTECE DEPOIS DO LOGIN PARA Professor
@@ -242,8 +245,10 @@ def root():
             classe = request.form["aulas"]
             list_classes = Aula.query.filter_by(nome=classe).all()
             for i in list_classes:
-                print(i)
                 i.isActive = False
+                if i.isPresent == False:
+                    i.numFaltas += 1
+                i.isPresent = False
             db.session.commit()
             return render_template('login.html')
 

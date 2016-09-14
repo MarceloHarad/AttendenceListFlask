@@ -33,7 +33,9 @@
       font-family: 'Open Sans Condensed', sans-serif;
       line-height: 1.8;
       color: #2f2f2f;
-      background-size: 105%;
+      background:url('http://www.athiewohnrath.com.br/wp-content/uploads/2015/05/wpid-3ae0dfa2-711b-4c9b-9810-303278c8cdcb.jpg')no-repeat;
+      background-size: 100%;
+      width: fixed;
   }
 
   .bg-2 {
@@ -101,10 +103,9 @@
   </nav>
 
     <!-- Perfil / Assinar Lista -->
-  <a id="perfil"></a>
   <div class="container bg-1 text-center transparent ">
     <a id="perfil"></a>
-    <div class="jumbotron transparent, menu1">
+    <div class="jumbotron transparent">
       <br>
       <br>
       <br>
@@ -118,7 +119,7 @@
         <h3 class="margin">Confirmar presença em aula</h3>
         {% if aula_ativa %}
           <p> Você está em horário de aula:</p>
-          <br>
+          <p class="p2"> {{nome_aula}} </p>
           <form role="form" method="post" id="sign_list">
             {% for i in aulas %}
               {% if i.isActive %}
@@ -136,8 +137,11 @@
       </div>
     </div>
   </div>
+</div>
 <hr></hr>
 <!-- Frequencia -->
+
+<div class="container-fluid bg-2 text-center>
 <a id="frequencia"></a>
 <div class="container-fluid bg-3 text-center">
 <h3 class="margin p2">Frequência no semestre</h3>
