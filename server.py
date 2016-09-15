@@ -261,6 +261,13 @@ def root():
             db.session.commit()
             return render_template('login.html')
 
+        elif request.form["btn"] == "remove":
+            id_aula = request.form["id_aula_remove"]
+            aula_remove = Aula.query.filter_by(id=id_aula).first()
+            aula_remove.isPresent = False
+            db.session.commit()
+            return render_template('login.html')
+
         elif request.form["btn"] != None:
             ("NONE")
             classe = request.form["btn"]
@@ -269,7 +276,6 @@ def root():
             user = User.query.filter_by(email=email).first()
             date = time.strftime('%d/%m/%Y')
             return render_template('professor.html', aulas = list_classes, user = user, date = date, nome_aula = classe)
-
         else:
             print("else")
             return render_template('login.html')

@@ -165,8 +165,11 @@
           <td>{{aula.isPresent}}</td>
           {% if aula.isPresent %}
             <td>
-              <a href="#" class="btn-sm btn-default">
-                <span class="glyphicon glyphicon-remove-sign"></span>
+              <form role="form" method="post" id="remove_presence">
+                <input type="hidden" name="id_aula_remove" value =  "{{ aula.id }}" >
+                <button type = "submit" name = "btn" value = "remove" class="btn-sm btn-default">
+                  <span class="glyphicon glyphicon-remove-sign"></span>
+              </form>
             </td>
           {% endif %}
         </tr>
