@@ -156,6 +156,7 @@
         <tr>
           <th class="p2 text-center">Aluno</th>
           <th class="p2 text-center">Presença</th>
+          <!--<th class="p2 text-center">Horário</th>-->
         </tr>
       </thead>
       <tbody>
@@ -163,6 +164,7 @@
         <tr>
           <td>{{aula.nameStudent}}</td>
           <td>{{aula.isPresent}}</td>
+          <!--<td>{{aula.hour}}</td>-->
           {% if aula.isPresent %}
             <td>
               <form role="form" method="post" id="remove_presence">

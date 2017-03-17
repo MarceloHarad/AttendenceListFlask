@@ -8,11 +8,11 @@ from werkzeug.utils import secure_filename
 import time
 
 
-UPLOAD_FOLDER = '/home/marcelo/Documents/Insper/Tecnologicas Web/AttendenceListFlask/static/photos'
+UPLOAD_FOLDER = 'C:/Users/rache/Documents/TecWeb/AttendenceListFlask/static/photos/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///basedados.db'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 db = SQLAlchemy(app)
 
@@ -92,9 +92,11 @@ class Aula(db.Model):
     isActive = db.Column(db.Boolean(), unique=False)
     isPresent = db.Column(db.Boolean(), unique=False)
     nameStudent = db.Column(db.String(80), unique=False)
+    horaPresenca = db.Column(db.String(10), unique=False)
 
-    def __init__(self,nome,numAulas,nameStudent):
+    def __init__(self,nome,horaPresenca,numAulas,nameStudent):
         self.nome = nome
+        self.horaPresenca = horaPresenca
         self.numAulas = numAulas
         self.numFaltas = 0
         self.isActive = False
@@ -250,23 +252,25 @@ def root():
                     i.numFaltas += 1
                 i.isPresent = False
             db.session.commit()
-            return render_template('login.html')
+            return render_template('professor.html')
 
         elif request.form["btn"] == "sign":
             print("sign")
             id_aula = request.form["aulas_aluno"]
             aula = Aula.query.filter_by(id=int(id_aula)).first()
             aula.isPresent = True
+            hour = time.strftime('%H:%M:%S')
+            aula.horaPresenca = hour
             print(aula.nome)
             db.session.commit()
-            return render_template('login.html')
+            return render_template('aluno.html')
 
         elif request.form["btn"] == "remove":
             id_aula = request.form["id_aula_remove"]
             aula_remove = Aula.query.filter_by(id=id_aula).first()
             aula_remove.isPresent = False
             db.session.commit()
-            return render_template('login.html')
+            return render_template('professor.html')
 
         elif request.form["btn"] != None:
             ("NONE")
